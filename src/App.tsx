@@ -1,12 +1,21 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { FC } from "react";
+import "./App.css";
+import Recipe from "./pages";
 
-function App() {
+const App: FC = () => {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+      <div className="App-header">
+        <Recipe />
+        {/* <Recipe />
+        <Recipe />
+        <Recipe />
+        <Recipe />
+        <Recipe />
+        <Recipe />
+        <Recipe /> */}
+
+        {/* <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.tsx</code> and save to reload.
         </p>
@@ -17,10 +26,10 @@ function App() {
           rel="noopener noreferrer"
         >
           Learn React
-        </a>
-      </header>
+        </a> */}
+      </div>
     </div>
   );
-}
+};
 
 export default App;
