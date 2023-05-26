@@ -7,7 +7,7 @@ const RecipeCard: FC<any> = (props) => {
       <div
         className={`w-72 h-80 m-3 rounded-3xl overflow-hidden shadow-lg bg-gray-50 ${
           isEven ? "bg-red-200" : "bg-lime-200"
-        } ${isEven ? "text-lime-200" : "text-gray-400"}`}
+        } ${isEven ? "text-gray-400" : "text-zinc-600"}`}
       >
         <div className="overflow-hidden">
           <img

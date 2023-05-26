@@ -19,7 +19,7 @@ const Recipe: FC = () => {
         />
       </div>
       <div className="flex flex-wrap">
-        {[1, 2, 3, 4,5,6,7,8,9]?.map((dd) => {
+        {[1, 2, 3, 4, 5, 6, 7, 8, 9]?.map((dd) => {
           return (
             <RecipeCard
               description="Cannellini Bean and Asparagus Salad with Mushrooms"
