@@ -1,33 +1,21 @@
 import { FC } from "react";
 import "./App.css";
-import Recipe from "./pages";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import Routers from "./router/index";
+import { RouterProvider } from "react-router-dom";
 
 const App: FC = () => {
+  const queryClient = new QueryClient();
+
   return (
     <div className="App">
-      <div className="App-header">
-        <Recipe />
-        {/* <Recipe />
-        <Recipe />
-        <Recipe />
-        <Recipe />
-        <Recipe />
-        <Recipe />
-        <Recipe /> */}
-
-        {/* <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a> */}
-      </div>
+      <QueryClientProvider client={queryClient}>
+        <div className="App-header">
+          <div className="w-2/4">
+            <RouterProvider router={Routers} />
+          </div>
+        </div>
+      </QueryClientProvider>
     </div>
   );
 };
