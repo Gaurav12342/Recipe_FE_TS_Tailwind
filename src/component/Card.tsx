@@ -16,7 +16,7 @@ const RecipeCard: FC<any> = (props) => {
             alt="Recipe"
           />
         </div>
-        <div className={`h-24 flex items-center cursor-pointer`}>
+        <div className={`p-3 h-24 flex justify-center items-center cursor-pointer`}>
           <div className="font-bold text-lg text-center">{description}</div>
         </div>
       </div>
