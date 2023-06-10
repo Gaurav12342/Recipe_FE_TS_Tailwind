@@ -79,6 +79,17 @@ const RecipeById: FC = () => {
           })}
         </div>
       </div>
+
+      <div className="flex flex-col items-start mb-10">
+        <h1 className="text-3xl font-bold text-red-400 mt-14 mb-8">
+          Instructions
+        </h1>
+
+        <div
+          dangerouslySetInnerHTML={{ __html: data?.data?.instructions }}
+          className="text-2xl text-gray-400 text-left"
+        />
+      </div>
     </div>
   );
 };
