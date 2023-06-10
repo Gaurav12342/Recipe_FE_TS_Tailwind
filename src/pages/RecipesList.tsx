@@ -8,7 +8,7 @@ import useDebounce from "../hooks/useDebounce";
 const RecipesList: FC = () => {
   const [search, setSearch] = useState("");
   const [recipesLists, setRecipesLists] = useState([]);
-  
+
   const fetchRecipes = () => {
     return axios.get("/recipe/list").then((res) => res?.data);
   };
@@ -68,6 +68,7 @@ const RecipesList: FC = () => {
                 isEven={checkIsEven}
                 description={dd?.title}
                 imgUrl={dd?.image}
+                {...dd}
               />
             );
           })}
