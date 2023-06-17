@@ -120,6 +120,9 @@ const RecipeById: FC = () => {
             isOpen={isDeleteDialog}
             onConfirm={() => setIsDeleteDialog(false)}
             onCancel={() => setIsDeleteDialog(false)}
+            title={"Are you sure you want to delete record ?"}
+            confirmText={"Confirm"}
+            cancelText={"Cancel"}
           />
         )}
       </div>

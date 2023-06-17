@@ -1,7 +1,14 @@
 import { FC } from "react";
 
 const Dialog: FC<any> = (props) => {
-  const { onConfirm, onCancel, isOpen } = props;
+  const {
+    onConfirm,
+    onCancel,
+    isOpen,
+    title,
+    confirmText = "Delete",
+    cancelText = "Cancel",
+  } = props;
   return (
     <div>
       {isOpen ? (
@@ -28,21 +35,19 @@ const Dialog: FC<any> = (props) => {
                   </svg>
                 </div>
                 <div className="mt-2 text-center sm:ml-4 sm:text-left">
-                  <h4 className="text-lg font-medium text-gray-800">
-                    Are you sure you want to delete record ?
-                  </h4>
+                  <h4 className="text-lg font-medium text-gray-800">{title}</h4>
                   <div className="items-center gap-2 mt-3 sm:flex">
                     <button
                       className="w-full mt-2 p-2.5 flex-1 text-white bg-red-600 rounded-md outline-none ring-offset-2 ring-red-600 focus:ring-2"
                       onClick={onConfirm}
                     >
-                      Delete
+                      {confirmText}
                     </button>
                     <button
                       className="w-full mt-2 p-2.5 flex-1 text-gray-800 rounded-md outline-none border ring-offset-2 ring-indigo-600 focus:ring-2"
                       onClick={onCancel}
                     >
-                      Cancel
+                      {cancelText}
                     </button>
                   </div>
                 </div>
