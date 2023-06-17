@@ -4,8 +4,13 @@ import RecipeCard from "../component/Card";
 import axios from "../utils/axios";
 import { useQuery } from "@tanstack/react-query";
 import useDebounce from "../hooks/useDebounce";
+import Button from "../component/Button";
+import { useNavigate } from "react-router-dom";
+import { routesConstant } from "../router/constant";
 
 const RecipesList: FC = () => {
+  const navigate = useNavigate();
+
   const [search, setSearch] = useState("");
   const [recipesLists, setRecipesLists] = useState([]);
 
@@ -33,13 +38,20 @@ const RecipesList: FC = () => {
 
   const handleSearch = (e: any) => setSearch(e.target.value);
 
+  const navigateCreateRecipe = () => {
+    navigate(routesConstant?.recipeCreate?.path);
+  };
+
   return (
     <div>
       <section className="flex-col text-left py-5">
         <div className="py-3">
           <h1 className="text-red-400 text-5xl font-bold">Recipes</h1>
         </div>
-        <p className="text-xl text-gray-500">Easy recipes to cook at home</p>
+        <div className="flex flex-row justify-between items-center">
+          <p className="text-xl text-gray-500">Easy recipes to cook at home</p>
+          <Button onClick={navigateCreateRecipe}>Create Recipe</Button>
+        </div>
       </section>
       <div>
         <SearchInput

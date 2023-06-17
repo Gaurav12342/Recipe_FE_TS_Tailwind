@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import axios from "../utils/axios";
 import { useQuery } from "@tanstack/react-query";
 import Dialog from "../component/Dialog";
+import Button from "../component/Button";
 
 const RecipeById: FC = () => {
   const params = useParams();
@@ -32,21 +33,8 @@ const RecipeById: FC = () => {
       {/* Action Section  */}
 
       <div className="space-x-4 flex flex-row justify-end">
-        <button
-          className="uppercase  py-2 px-10 bg-[#acb9a2] hover:bg-[#fb693c] rounded-full text-white font-bold"
-          type="submit"
-          onClick={() => {}}
-        >
-          Edit
-        </button>
-
-        <button
-          className="uppercase  py-2 px-10 bg-[#acb9a2] hover:bg-[#fb693c] rounded-full text-white font-bold"
-          type="submit"
-          onClick={() => setIsDeleteDialog(true)}
-        >
-          Delete
-        </button>
+        <Button onClick={() => {}}>Edit</Button>
+        <Button onClick={() => setIsDeleteDialog(true)}>Delete</Button>
       </div>
 
       {/* Card section */}

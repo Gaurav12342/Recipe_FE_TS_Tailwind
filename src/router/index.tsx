@@ -2,8 +2,9 @@ import { createBrowserRouter } from "react-router-dom";
 import { routesConstant } from "./constant";
 import RecipesList from "../pages/RecipesList";
 import RecipeById from "../pages/RecipeById";
-import Home from "../pages/Home";
+// import Home from "../pages/Home";
 import RecipeHome from "../pages/index";
+import ManageRecipe from "../pages/ManageRecipe";
 
 const index: any = createBrowserRouter([
   {
@@ -17,6 +18,10 @@ const index: any = createBrowserRouter([
   {
     path: routesConstant.recipeById.path,
     element: <RecipeById />,
+  },
+  {
+    path: routesConstant.recipeCreate.path,
+    element: <ManageRecipe />,
   },
 ]);
 
