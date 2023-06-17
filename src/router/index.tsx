@@ -3,11 +3,12 @@ import { routesConstant } from "./constant";
 import RecipesList from "../pages/RecipesList";
 import RecipeById from "../pages/RecipeById";
 import Home from "../pages/Home";
+import RecipeHome from "../pages/index";
 
 const index: any = createBrowserRouter([
   {
-    path: "/",
-    element: <Home />,
+    path: routesConstant.recipeHome.path,
+    element: <RecipeHome />,
   },
   {
     path: routesConstant.recipe.path,
