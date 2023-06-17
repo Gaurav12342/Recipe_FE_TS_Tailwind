@@ -1,10 +1,13 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "../utils/axios";
 import { useQuery } from "@tanstack/react-query";
+import Dialog from "../component/Dialog";
 
 const RecipeById: FC = () => {
   const params = useParams();
+  const [isDeleteDialog, setIsDeleteDialog] = useState(false);
+
   const fetchRecipesById = () => {
     return axios.get(`/recipe/list/${params?.id}`).then((res) => res?.data);
   };
@@ -25,6 +28,26 @@ const RecipeById: FC = () => {
           </h1>
         </div>
       </section>
+
+      {/* Action Section  */}
+
+      <div className="space-x-4 flex flex-row justify-end">
+        <button
+          className="uppercase  py-2 px-10 bg-[#acb9a2] hover:bg-[#fb693c] rounded-full text-white font-bold"
+          type="submit"
+          onClick={() => {}}
+        >
+          Edit
+        </button>
+
+        <button
+          className="uppercase  py-2 px-10 bg-[#acb9a2] hover:bg-[#fb693c] rounded-full text-white font-bold"
+          type="submit"
+          onClick={() => setIsDeleteDialog(true)}
+        >
+          Delete
+        </button>
+      </div>
 
       {/* Card section */}
       <div>
@@ -89,6 +112,16 @@ const RecipeById: FC = () => {
           dangerouslySetInnerHTML={{ __html: data?.data?.instructions }}
           className="text-2xl text-gray-400 text-left"
         />
+      </div>
+
+      <div>
+        {isDeleteDialog && (
+          <Dialog
+            isOpen={isDeleteDialog}
+            onConfirm={() => setIsDeleteDialog(false)}
+            onCancel={() => setIsDeleteDialog(false)}
+          />
+        )}
       </div>
     </div>
   );
