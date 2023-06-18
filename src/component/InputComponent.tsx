@@ -1,6 +1,6 @@
 import { FC } from "react";
 
-const SearchInput: FC<any> = (props) => {
+const InputComponent: FC<any> = (props) => {
   const {
     handleChangeEvent,
     recipeValue,
@@ -22,4 +22,4 @@ const SearchInput: FC<any> = (props) => {
   );
 };
 
-export default SearchInput;
+export default InputComponent;
