@@ -104,7 +104,7 @@ const ManageRecipe: FC = () => {
         <InputComponent placeholder="Image" name={"image"} />
       </div>
 
-      <div>
+      <div className="mb-10">
         <Accordion
           sx={{
             borderRadius: "0.75rem !important",
@@ -128,8 +128,9 @@ const ManageRecipe: FC = () => {
                 const { unit, amount, originalName } = data;
                 return (
                   <>
-                    <div>
+                    <div className="flex flex-row justify-end mb-5">
                       <button
+                        className="py-1 px-3 bg-[#acb9a2] hover:bg-[#fb693c] rounded-lg text-white font-bold"
                         onClick={() => removeIngredientArrayFields(index)}
                       >
                         Delete
@@ -201,8 +202,9 @@ const ManageRecipe: FC = () => {
               {cuisinesArray?.map((data: any, index: any) => {
                 return (
                   <>
-                    <div>
+                    <div className="flex flex-row justify-end mb-5">
                       <button
+                        className="py-1 px-3 bg-[#acb9a2] hover:bg-[#fb693c] rounded-lg text-white font-bold"
                         type="submit"
                         onClick={() => removeCuisineFields(index)}
                       >
