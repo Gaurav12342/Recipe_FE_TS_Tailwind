@@ -9,8 +9,12 @@ import {
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Button from "../component/Button";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import { routesConstant } from "../router/constant";
 
 const ManageRecipe: FC = () => {
+  const navigate = useNavigate();
+
   const [isIngredient, setIsIngredient] = useState(false);
   const [isCuisine, setIsCuisine] = useState(false);
   const [ingredientArray, setIngredientArray] = useState([
@@ -30,6 +34,7 @@ const ManageRecipe: FC = () => {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm<any>();
 
   const addInputField = () => {
@@ -78,6 +83,14 @@ const ManageRecipe: FC = () => {
       cuisines: cuisinesArray,
     };
     console.log(newObj);
+  };
+
+  const handleNavigate = () => {
+    navigate(routesConstant?.recipe?.path);
+  };
+
+  const handleCancel = () => {
+    reset();
   };
 
   return (
@@ -241,8 +254,14 @@ const ManageRecipe: FC = () => {
           </Accordion>
         </div>
 
-        <div className="flex my-5">
+        <div className="flex my-5 space-x-5">
           <Button type="submit">Create</Button>
+          <Button type="submit" onClick={handleCancel}>
+            Cancel
+          </Button>
+          <Button type="submit" onClick={handleNavigate}>
+            Back
+          </Button>
         </div>
       </form>
     </div>
