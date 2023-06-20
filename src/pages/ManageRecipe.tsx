@@ -11,6 +11,8 @@ import Button from "../component/Button";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { routesConstant } from "../router/constant";
+import { useMutation } from "@tanstack/react-query";
+import axios from "../utils/axios";
 
 const ManageRecipe: FC = () => {
   const navigate = useNavigate();
@@ -36,6 +38,17 @@ const ManageRecipe: FC = () => {
     formState: { errors },
     reset,
   } = useForm<any>();
+
+  const { mutate } = useMutation({
+    mutationFn: (newTodo) => {
+      return axios.post("/recipe/create", newTodo);
+    },
+    onSuccess(data) {
+      if (data?.data?.status === 201) {
+        navigate(routesConstant?.recipe?.path);
+      }
+    },
+  });
 
   const addInputField = () => {
     setIngredientArray([
@@ -80,9 +93,10 @@ const ManageRecipe: FC = () => {
     }
     const newObj = {
       ...data,
+      imageType: "jpg",
       cuisines: cuisinesArray,
     };
-    console.log(newObj);
+    mutate(newObj);
   };
 
   const handleNavigate = () => {
