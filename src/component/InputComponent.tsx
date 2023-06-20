@@ -1,13 +1,7 @@
 import { FC } from "react";
 
 const InputComponent: FC<any> = (props) => {
-  const {
-    handleChangeEvent,
-    recipeValue,
-    name,
-    placeholder,
-    type = "text",
-  } = props;
+  const { name, placeholder, type = "text", register } = props;
   return (
     <div>
       <input
@@ -15,8 +9,7 @@ const InputComponent: FC<any> = (props) => {
         type={type}
         name={name}
         placeholder={placeholder}
-        onChange={handleChangeEvent}
-        value={recipeValue}
+        {...register}
       />
     </div>
   );

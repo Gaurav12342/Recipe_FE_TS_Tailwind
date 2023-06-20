@@ -1,12 +1,14 @@
 import { FC, useState } from "react";
 import InputComponent from "../component/InputComponent";
-
-import Accordion from "@mui/material/Accordion";
-import AccordionSummary from "@mui/material/AccordionSummary";
-import AccordionDetails from "@mui/material/AccordionDetails";
-import Typography from "@mui/material/Typography";
+import {
+  Typography,
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
+} from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Button from "../component/Button";
+import { useForm } from "react-hook-form";
 
 const ManageRecipe: FC = () => {
   const [isIngredient, setIsIngredient] = useState(false);
@@ -24,17 +26,11 @@ const ManageRecipe: FC = () => {
     },
   ]);
 
-  const handleIngredientChange = (index: any, evnt: any) => {
-    const { name, value } = evnt.target;
-    const list: any = [...ingredientArray];
-    list[index][name] = value;
-  };
-
-  const handleCuisineChange = (index: any, evnt: any) => {
-    const { name, value } = evnt.target;
-    const list: any = [...cuisinesArray];
-    list[index][name] = value;
-  };
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<any>();
 
   const addInputField = () => {
     setIngredientArray([
@@ -68,172 +64,187 @@ const ManageRecipe: FC = () => {
     setCuisinesArray(rows);
   };
 
-  const handleSubmit = (e: any) => {
-    e.preventDefault();
-    console.log("cuisinesArray =>", cuisinesArray);
+  const onSubmit: any = (data: any) => {
+    const cuisinesArray: any = [];
+    if (data?.cuisines?.length > 0) {
+      data?.cuisines?.map((dd: any) => {
+        return cuisinesArray.push(dd?.cuisine);
+      });
+    } else {
+      cuisinesArray.push([]);
+    }
+    const newObj = {
+      ...data,
+      cuisines: cuisinesArray,
+    };
+    console.log(newObj);
   };
 
   return (
     <div>
-      <div className="py-3 flex mb-5">
-        <h1 className="text-red-400 text-5xl font-bold">Recipe</h1>
-      </div>
-      <div>
-        <InputComponent placeholder="Title" name={"title"} />
-        <textarea
-          placeholder="Description"
-          name={"description"}
-          className="w-full p-2 mb-10 rounded-xl border-solid border border-slate-600 px-4 focus:border-red-400 outline-none"
-        />
-      </div>
-
-      <div className="flex flex-row space-x-4">
-        <div className="w-2/4">
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <div className="py-3 flex mb-5">
+          <h1 className="text-red-400 text-5xl font-bold">Recipe</h1>
+        </div>
+        <div>
           <InputComponent
-            className={"w"}
-            placeholder="Ready in minute"
-            name={"readyInMinutes"}
+            name="title"
+            placeholder="Title"
+            register={register("title", { required: true })}
+          />
+
+          <textarea
+            placeholder="Instructions"
+            className="w-full p-2 mb-10 rounded-xl border-solid border border-slate-600 px-4 focus:border-red-400 outline-none"
+            {...register("instructions")}
           />
         </div>
-        <div className="w-2/4">
-          <InputComponent placeholder="Servings" name={"servings"} />
+
+        <div className="flex flex-row space-x-4">
+          <div className="w-2/4">
+            <InputComponent
+              className={"w"}
+              placeholder="Ready in minute"
+              register={register("readyInMinutes")}
+            />
+          </div>
+          <div className="w-2/4">
+            <InputComponent
+              placeholder="Servings"
+              register={register("servings")}
+            />
+          </div>
         </div>
-      </div>
 
-      <div>
-        <InputComponent placeholder="Image" name={"image"} />
-      </div>
+        <div>
+          <InputComponent placeholder="Image" register={register("image")} />
+        </div>
 
-      <div className="mb-10">
-        <Accordion
-          sx={{
-            borderRadius: "0.75rem !important",
-            border: "1px solid #535d6c",
-          }}
-          onChange={() => {
-            setIsIngredient(!isIngredient);
-          }}
-          expanded={isIngredient}
-        >
-          <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-            <Typography>Extend Ingredient</Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <div>
-              <div className="flex mb-5">
-                <Button onClick={addInputField}>Add</Button>
-              </div>
+        <div className="mb-10">
+          <Accordion
+            sx={{
+              borderRadius: "0.75rem !important",
+              border: "1px solid #535d6c",
+            }}
+            onChange={() => {
+              setIsIngredient(!isIngredient);
+            }}
+            expanded={isIngredient}
+          >
+            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+              <Typography>Extend Ingredient</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <div>
+                <div className="flex mb-5">
+                  <Button onClick={addInputField}>Add</Button>
+                </div>
 
-              {ingredientArray?.map((data: any, index: any) => {
-                const { unit, amount, originalName } = data;
-                return (
-                  <>
-                    <div className="flex flex-row justify-end mb-5">
-                      <button
-                        className="py-1 px-3 bg-[#acb9a2] hover:bg-[#fb693c] rounded-lg text-white font-bold"
-                        onClick={() => removeIngredientArrayFields(index)}
-                      >
-                        Delete
-                      </button>
-                    </div>
-                    <div className="flex flex-row space-x-4">
-                      <div className="w-2/4">
+                {ingredientArray?.map((data: any, index: any) => {
+                  const { unit, amount, originalName } = data;
+                  return (
+                    <>
+                      <div className="flex flex-row justify-end mb-5">
+                        <button
+                          className="py-1 px-3 bg-[#acb9a2] hover:bg-[#fb693c] rounded-lg text-white font-bold"
+                          onClick={() => removeIngredientArrayFields(index)}
+                        >
+                          Delete
+                        </button>
+                      </div>
+                      <div className="flex flex-row space-x-4">
+                        <div className="w-2/4">
+                          <InputComponent
+                            placeholder="Amount"
+                            name={"amount"}
+                            register={register(
+                              `extendedIngredients.${index}.amount`
+                            )}
+                          />
+                        </div>
+                        <div className="w-2/4">
+                          <InputComponent
+                            placeholder="Unit"
+                            name={"unit"}
+                            register={register(
+                              `extendedIngredients.${index}.unit`
+                            )}
+                          />
+                        </div>
+                      </div>
+
+                      <div>
                         <InputComponent
-                          placeholder="Amount"
-                          name={"amount"}
-                          handleChangeEvent={(evnt: any) =>
-                            handleIngredientChange(index, evnt)
-                          }
-                          value={amount}
+                          placeholder="Original Name"
+                          name={"originalName"}
+                          register={register(
+                            `extendedIngredients.${index}.originalName`
+                          )}
                         />
                       </div>
-                      <div className="w-2/4">
+
+                      <div className="border-b-[1px] border-red-400 mb-5"></div>
+                    </>
+                  );
+                })}
+              </div>
+            </AccordionDetails>
+          </Accordion>
+        </div>
+
+        <div>
+          <Accordion
+            sx={{
+              borderRadius: "0.75rem !important",
+              border: "1px solid #535d6c",
+            }}
+            onChange={() => {
+              setIsCuisine(!isCuisine);
+            }}
+            expanded={isCuisine}
+          >
+            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+              <Typography>Cuisines</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <div>
+                <div className="flex mb-5">
+                  <Button onClick={addCuisineField}>Add</Button>
+                </div>
+
+                {cuisinesArray?.map((data: any, index: any) => {
+                  return (
+                    <>
+                      <div className="flex flex-row justify-end mb-5">
+                        <button
+                          className="py-1 px-3 bg-[#acb9a2] hover:bg-[#fb693c] rounded-lg text-white font-bold"
+                          type="submit"
+                          onClick={() => removeCuisineFields(index)}
+                        >
+                          Delete
+                        </button>
+                      </div>
+                      <div>
                         <InputComponent
-                          placeholder="Unit"
-                          name={"unit"}
-                          handleChangeEvent={(evnt: any) =>
-                            handleIngredientChange(index, evnt)
-                          }
-                          value={unit}
+                          placeholder="cuisine"
+                          name={"cuisine"}
+                          register={register(`cuisines.${index}.cuisine`)}
                         />
                       </div>
-                    </div>
 
-                    <div>
-                      <InputComponent
-                        placeholder="Original Name"
-                        name={"originalName"}
-                        handleChangeEvent={(evnt: any) =>
-                          handleIngredientChange(index, evnt)
-                        }
-                        value={originalName}
-                      />
-                    </div>
-
-                    <div className="border-b-[1px] border-red-400 mb-5"></div>
-                  </>
-                );
-              })}
-            </div>
-          </AccordionDetails>
-        </Accordion>
-      </div>
-
-      <div>
-        <Accordion
-          sx={{
-            borderRadius: "0.75rem !important",
-            border: "1px solid #535d6c",
-          }}
-          onChange={() => {
-            setIsCuisine(!isCuisine);
-          }}
-          expanded={isCuisine}
-        >
-          <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-            <Typography>Cuisines</Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <div>
-              <div className="flex mb-5">
-                <Button onClick={addCuisineField}>Add</Button>
+                      <div className="border-b-[1px] border-red-400 mb-5"></div>
+                    </>
+                  );
+                })}
               </div>
+            </AccordionDetails>
+          </Accordion>
+        </div>
 
-              {cuisinesArray?.map((data: any, index: any) => {
-                return (
-                  <>
-                    <div className="flex flex-row justify-end mb-5">
-                      <button
-                        className="py-1 px-3 bg-[#acb9a2] hover:bg-[#fb693c] rounded-lg text-white font-bold"
-                        type="submit"
-                        onClick={() => removeCuisineFields(index)}
-                      >
-                        Delete
-                      </button>
-                    </div>
-                    <div>
-                      <InputComponent
-                        placeholder="cuisine"
-                        name={"cuisine"}
-                        handleChangeEvent={(evnt: any) =>
-                          handleCuisineChange(index, evnt)
-                        }
-                        value={data?.cuisine}
-                      />
-                    </div>
-
-                    <div className="border-b-[1px] border-red-400 mb-5"></div>
-                  </>
-                );
-              })}
-            </div>
-          </AccordionDetails>
-        </Accordion>
-      </div>
-
-      <div className="flex my-5">
-        <Button onClick={handleSubmit}>Create</Button>
-      </div>
+        <div className="flex my-5">
+          <Button type="submit">Create</Button>
+        </div>
+      </form>
     </div>
   );
 };

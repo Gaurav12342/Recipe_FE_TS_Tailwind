@@ -55,13 +55,13 @@ const RecipesList: FC = () => {
         </div>
       </section>
       <div>
-        <InputComponent
+        {/* <InputComponent
           placeholder="Enter the some recipe name..."
           name={"searchRecipe"}
           type={"search"}
           recipeValue={search || ""}
           handleChangeEvent={handleSearch}
-        />
+        /> */}
       </div>
       {isLoading ? (
         <div
