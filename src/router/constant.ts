@@ -5,4 +5,5 @@ export const routesConstant = {
   recipeById: { path: "/recipes/:id" },
 
   signIn: { path: "/sign-in" },
+  signUp: { path: "/sign-up" },
 };

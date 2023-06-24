@@ -13,7 +13,7 @@ import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { routesConstant } from "../../../router/constant";
 
-const SignIn: FC = () => {
+const SignUp: FC = () => {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
 
@@ -37,6 +37,9 @@ const SignIn: FC = () => {
     console.log(data);
   };
 
+  const handleNavigate = () => {
+    navigate(routesConstant?.signIn?.path);
+  };
   return (
     <div>
       <>
@@ -51,7 +54,7 @@ const SignIn: FC = () => {
               </div>
               <div className="w-full md:mt-10 md:w-1/2">
                 <div className="px-8 py-3">
-                  <h1 className="text-red-400 text-4xl font-bold">Sign In</h1>
+                  <h1 className="text-red-400 text-4xl font-bold">Sign Up</h1>
                 </div>
 
                 <div className="space-y-6 flex-col ml-5 mr-16 md:mx-8 md:ml-3">
@@ -130,7 +133,7 @@ const SignIn: FC = () => {
                     className="py-1 px-5 bg-[#acb9a2] hover:bg-[#fb693c] rounded-lg text-white font-bold"
                     type="submit"
                   >
-                    Sign In
+                    Sign Up
                   </button>
 
                   <button
@@ -144,12 +147,12 @@ const SignIn: FC = () => {
 
                 <div className="mt-5">
                   <p className="text-gray-500">
-                    Don't have an account ?{" "}
+                    Already have an account ?{" "}
                     <a
                       className="font-bold text-[#fb693c]"
-                      href={routesConstant?.signUp?.path}
+                      href={routesConstant?.signIn?.path}
                     >
-                      Sign Up
+                      Sign In
                     </a>
                   </p>
                 </div>
@@ -162,4 +165,4 @@ const SignIn: FC = () => {
   );
 };
 
-export default SignIn;
+export default SignUp;

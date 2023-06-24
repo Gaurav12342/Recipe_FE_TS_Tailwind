@@ -6,6 +6,7 @@ import RecipeDetail from "../pages/Recipe/RecipeDetail";
 import RecipeHome from "../pages/index";
 import ManageRecipe from "../pages/Recipe/ManageRecipe";
 import SignIn from "../pages/Auth/Sign-In/index";
+import SignUp from "../pages/Auth/Sign-up";
 
 const index: any = createBrowserRouter([
   {
@@ -27,6 +28,10 @@ const index: any = createBrowserRouter([
   {
     path: routesConstant.signIn.path,
     element: <SignIn />,
+  },
+  {
+    path: routesConstant.signUp.path,
+    element: <SignUp />,
   },
 ]);
 
