@@ -5,6 +5,7 @@ import RecipeDetail from "../pages/Recipe/RecipeDetail";
 // import Home from "../pages/Home";
 import RecipeHome from "../pages/index";
 import ManageRecipe from "../pages/Recipe/ManageRecipe";
+import SignIn from "../pages/Auth/Sign-In/index";
 
 const index: any = createBrowserRouter([
   {
@@ -22,6 +23,10 @@ const index: any = createBrowserRouter([
   {
     path: routesConstant.recipeCreate.path,
     element: <ManageRecipe />,
+  },
+  {
+    path: routesConstant.signIn.path,
+    element: <SignIn />,
   },
 ]);
 

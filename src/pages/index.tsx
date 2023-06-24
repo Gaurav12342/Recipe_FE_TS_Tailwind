@@ -7,6 +7,10 @@ const Recipe: FC = () => {
   const handleNavigate = () => {
     navigate(routesConstant?.recipe?.path);
   };
+
+  const handleSignInNavigate = () => {
+    navigate(routesConstant?.signIn?.path);
+  };
   return (
     <div>
       <div className="my-16 flex flex-row justify-between items-end">
@@ -21,7 +25,7 @@ const Recipe: FC = () => {
           <button
             className="py-2 px-5 bg-[#acb9a2] hover:bg-[#fb693c] rounded-full text-white font-bold"
             type="submit"
-            onClick={handleNavigate}
+            onClick={handleSignInNavigate}
           >
             Sign In
           </button>

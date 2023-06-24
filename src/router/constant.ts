@@ -3,4 +3,6 @@ export const routesConstant = {
   recipe: { path: "/recipes" },
   recipeCreate: { path: "/recipes/create" },
   recipeById: { path: "/recipes/:id" },
+
+  signIn: { path: "/sign-in" },
 };
