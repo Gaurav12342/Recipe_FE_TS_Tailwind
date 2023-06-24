@@ -1,10 +1,10 @@
 import { createBrowserRouter } from "react-router-dom";
 import { routesConstant } from "./constant";
-import RecipesList from "../pages/RecipesList";
-import RecipeById from "../pages/RecipeById";
+import RecipesList from "../pages/Recipe";
+import RecipeDetail from "../pages/Recipe/RecipeDetail";
 // import Home from "../pages/Home";
 import RecipeHome from "../pages/index";
-import ManageRecipe from "../pages/ManageRecipe";
+import ManageRecipe from "../pages/Recipe/ManageRecipe";
 
 const index: any = createBrowserRouter([
   {
@@ -17,7 +17,7 @@ const index: any = createBrowserRouter([
   },
   {
     path: routesConstant.recipeById.path,
-    element: <RecipeById />,
+    element: <RecipeDetail />,
   },
   {
     path: routesConstant.recipeCreate.path,

@@ -1,11 +1,11 @@
 import { FC, useState } from "react";
 import { useParams } from "react-router-dom";
-import axios from "../utils/axios";
+import axios from "../../utils/axios";
 import { useQuery } from "@tanstack/react-query";
-import Dialog from "../component/Dialog";
-import Button from "../component/Button";
+import Dialog from "../../component/Dialog";
+import Button from "../../component/Button";
 
-const RecipeById: FC = () => {
+const RecipeDetail: FC = () => {
   const params = useParams();
   const [isDeleteDialog, setIsDeleteDialog] = useState(false);
 
@@ -118,4 +118,4 @@ const RecipeById: FC = () => {
   );
 };
 
-export default RecipeById;
+export default RecipeDetail;

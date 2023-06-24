@@ -9,7 +9,7 @@ const Recipe: FC = () => {
   };
   return (
     <div>
-      <div className="my-16 flex flex-row justify-between items-center">
+      <div className="my-16 flex flex-row justify-between items-end">
         <img
           src="https://recipes-blog-kauanidev.vercel.app/assets/Logo.5d4b5be6.svg"
           alt="img"
@@ -17,17 +17,27 @@ const Recipe: FC = () => {
           height={48}
         />
 
-        <button
-          className="py-5 px-12 bg-[#acb9a2] hover:bg-[#fb693c] rounded-full text-white font-bold"
-          type="submit"
-          onClick={handleNavigate}
-        >
-          GO TO RECIPES
-        </button>
+        <div className="flex flex-row space-x-5">
+          <button
+            className="py-2 px-5 bg-[#acb9a2] hover:bg-[#fb693c] rounded-full text-white font-bold"
+            type="submit"
+            onClick={handleNavigate}
+          >
+            Sign In
+          </button>
+
+          <button
+            className="py-2 px-5 bg-[#acb9a2] hover:bg-[#fb693c] rounded-full text-white font-bold"
+            type="submit"
+            onClick={handleNavigate}
+          >
+            Sign Up
+          </button>
+        </div>
       </div>
 
       <div className="grid grid-col-6 grid-flow-col gap-32">
-        <div className="w-[370px] text-left">
+        <div className="w-[370px] text-left space-y-8">
           <h1 className="text-[#fb693c] mb-8 font-bold text-5xl">
             Easy & Smart Recipes
           </h1>
@@ -37,6 +47,14 @@ const Recipe: FC = () => {
             diversity in recipes. No more repeating the same food every day. So,
             shall we cook?
           </p>
+
+          <button
+            className="py-3 px-10 bg-[#acb9a2] hover:bg-[#fb693c] rounded-full text-white font-bold"
+            type="submit"
+            onClick={handleNavigate}
+          >
+            GO TO RECIPES
+          </button>
         </div>
 
         <div>
