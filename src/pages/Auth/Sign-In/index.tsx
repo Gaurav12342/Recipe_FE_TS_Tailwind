@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import deskImage from "../../../assets/images/image-desktop.jpg";
-import { useForm, Controller, SubmitHandler } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { routesConstant } from "../../../router/constant";
 import axios from "axios";
@@ -61,7 +61,7 @@ const SignIn: FC = () => {
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="flex flex-col max-w-3xl ml-48 -mr-32 md:mx-auto mt-1 md:mt-32 rounded-xl overflow-hidden bg-red-100 md:flex md:flex-row">
               <div className="w-full md:w-1/2">
-                <img src={deskImage} className="w-full h-52 md:h-96" />
+                <img src={deskImage} alt="desk" className="w-full h-52 md:h-96" />
               </div>
               <div className="w-full md:mt-10 md:w-1/2">
                 <div className="px-8 py-3">

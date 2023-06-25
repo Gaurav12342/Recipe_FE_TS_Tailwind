@@ -35,7 +35,6 @@ const ManageRecipe: FC = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
     reset,
   } = useForm<any>();
 
@@ -168,7 +167,6 @@ const ManageRecipe: FC = () => {
                 </div>
 
                 {ingredientArray?.map((data: any, index: any) => {
-                  const { unit, amount, originalName } = data;
                   return (
                     <>
                       <div className="flex flex-row justify-end mb-5">

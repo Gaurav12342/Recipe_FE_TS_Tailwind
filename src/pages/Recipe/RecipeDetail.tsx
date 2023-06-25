@@ -13,7 +13,7 @@ const RecipeDetail: FC = () => {
     return axios.get(`/recipe/list/${params?.id}`).then((res) => res?.data);
   };
 
-  const { data, isLoading } = useQuery({
+  const { data } = useQuery({
     queryKey: ["fetch guery by id"],
     queryFn: fetchRecipesById,
   });
