@@ -12,10 +12,24 @@ import deskImage from "../../../assets/images/image-desktop.jpg";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { routesConstant } from "../../../router/constant";
+import axios from "axios";
+import { useMutation } from "@tanstack/react-query";
 
 const SignIn: FC = () => {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
+
+  const { mutate, isLoading } = useMutation({
+    mutationFn: (newTodo) => {
+      return axios.post("/auth/sign-in", newTodo);
+    },
+    onSuccess(data, variables, context) {
+      if (data?.data?.status === 200) {
+        localStorage.setItem("user-data", data?.data?.accessToken);
+        navigate(routesConstant?.recipe?.path);
+      }
+    },
+  });
 
   const {
     control,
@@ -34,7 +48,7 @@ const SignIn: FC = () => {
   };
 
   const onSubmit = (data: any) => {
-    console.log(data);
+    mutate(data);
   };
 
   return (
@@ -129,8 +143,9 @@ const SignIn: FC = () => {
                   <button
                     className="py-1 px-5 bg-[#acb9a2] hover:bg-[#fb693c] rounded-lg text-white font-bold"
                     type="submit"
+                    disabled={isLoading}
                   >
-                    Sign In
+                    {isLoading ? "Sign In..." : "Sign In"}
                   </button>
 
                   <button
