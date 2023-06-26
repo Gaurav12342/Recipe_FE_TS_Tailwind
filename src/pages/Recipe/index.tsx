@@ -8,9 +8,11 @@ import Button from "../../component/Button";
 import { useNavigate } from "react-router-dom";
 import { routesConstant } from "../../router/constant";
 import InputComponent from "../../component/InputComponent";
+import { useForm } from "react-hook-form";
 
 const RecipesList: FC = () => {
   const navigate = useNavigate();
+  const { register } = useForm({});
 
   const [search, setSearch] = useState("");
   const [recipesLists, setRecipesLists] = useState([]);
@@ -28,8 +30,8 @@ const RecipesList: FC = () => {
   useDebounce(
     () => {
       setRecipesLists(
-        recipeList.data.filter((d: any) =>
-          d.title.toLowerCase().includes(search.toLowerCase())
+        recipeList?.data?.filter((d: any) =>
+          d?.title?.toLowerCase().includes(search.toLowerCase())
         )
       );
     },
@@ -55,15 +57,16 @@ const RecipesList: FC = () => {
         </div>
       </section>
       <div>
-        {/* <InputComponent
-          placeholder="Enter the some recipe name..."
-          name={"searchRecipe"}
-          type={"search"}
-          recipeValue={search || ""}
-          handleChangeEvent={handleSearch}
-        /> */}
+        <InputComponent
+          type="search"
+          name="searchRecipe"
+          placeholder="Search Recipe"
+          register={register("searchRecipe", {
+            onChange: handleSearch,
+          })}
+        />
       </div>
-      {isLoading ? (
+      {isLoading && recipesLists?.length > 0 ? (
         <div
           className="inline-block h-12 w-12 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
           role="status"
