@@ -17,7 +17,7 @@ const RecipesList: FC = () => {
 
   const [search, setSearch] = useState("");
   const [recipesLists, setRecipesLists] = useState([]);
-
+  
   const fetchRecipes = () => {
     return axios.get("/recipe/list").then((res) => res?.data);
   };
@@ -26,7 +26,7 @@ const RecipesList: FC = () => {
     queryKey: ["recipe-list"],
     queryFn: fetchRecipes,
   });
-
+  
   // DeBounce Function
   useDebounce(
     () => {
@@ -69,7 +69,7 @@ const RecipesList: FC = () => {
           })}
         />
       </div>
-      {isLoading && recipesLists?.length > 0 ? (
+      {isLoading || recipesLists?.length <= 0 ? (
         <div
           className="inline-block h-12 w-12 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
           role="status"
