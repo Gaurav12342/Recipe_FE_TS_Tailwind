@@ -12,6 +12,7 @@ import deskImage from "../../../assets/images/image-desktop.jpg";
 import { useForm, Controller } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { routesConstant } from "../../../router/constant";
+import InputComponent from "../../../component/InputComponent";
 
 const SignUp: FC = () => {
   const navigate = useNavigate();
@@ -22,8 +23,12 @@ const SignUp: FC = () => {
     handleSubmit,
     formState: { errors },
     reset,
+    register,
   } = useForm({
     defaultValues: {
+      fname: "",
+      lname: "",
+      city: "",
       email: "",
       password: "",
     },
@@ -47,7 +52,11 @@ const SignUp: FC = () => {
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="flex flex-col max-w-3xl ml-48 -mr-32 md:mx-auto mt-1 md:mt-32 rounded-xl overflow-hidden bg-red-100 md:flex md:flex-row">
               <div className="w-full md:w-1/2">
-                <img src={deskImage} alt="desk" className="w-full h-52 md:h-96" />
+                <img
+                  src={deskImage}
+                  alt="desk"
+                  className="w-full h-52 md:h-96"
+                />
               </div>
               <div className="w-full md:mt-10 md:w-1/2">
                 <div className="px-8 py-3">
@@ -55,21 +64,45 @@ const SignUp: FC = () => {
                 </div>
 
                 <div className="space-y-6 flex-col ml-5 mr-16 md:mx-8 md:ml-3">
-                  <Controller
+                  <InputComponent
+                    name="fname"
+                    placeholder="First Name"
+                    register={register("fname", {
+                      required: true,
+                    })}
+                  />
+                  {errors?.fname?.type === "required" && (
+                    <div className="!mt-0 ml-[5px] text-left">
+                      <p className="text-slate-400">Password is required.</p>
+                    </div>
+                  )}
+
+                  <InputComponent
+                    name="lname"
+                    placeholder="Last Name"
+                    register={register("lname", {
+                      required: true,
+                    })}
+                  />
+                  {errors?.lname?.type === "required" && (
+                    <div className="!mt-0 ml-[5px] text-left">
+                      <p className="text-slate-400">Password is required.</p>
+                    </div>
+                  )}
+
+                  <InputComponent
+                    name="city"
+                    placeholder="City"
+                    register={register("city")}
+                  />
+
+                  <InputComponent
                     name="email"
-                    control={control}
-                    rules={{
+                    placeholder="Email"
+                    register={register("email", {
                       required: true,
                       pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/,
-                    }}
-                    render={({ field }) => (
-                      <TextField
-                        fullWidth
-                        label="Email"
-                        variant="outlined"
-                        {...field}
-                      />
-                    )}
+                    })}
                   />
                   {errors?.email?.type === "required" && (
                     <div className="!mt-0 ml-[5px] text-left">
@@ -85,45 +118,20 @@ const SignUp: FC = () => {
                     </div>
                   )}
 
-                  <FormControl fullWidth variant="outlined">
-                    <InputLabel htmlFor="outlined-adornment-password">
-                      Password
-                    </InputLabel>
-
-                    <Controller
-                      name="password"
-                      control={control}
-                      rules={{ required: true }}
-                      render={({ field }) => (
-                        <OutlinedInput
-                          {...field}
-                          id="standard-adornment-password"
-                          type={showPassword ? "text" : "password"}
-                          endAdornment={
-                            <InputAdornment position="end">
-                              <IconButton
-                                aria-label="toggle password visibility"
-                                onClick={handleClickShowPassword}
-                              >
-                                {showPassword ? (
-                                  <VisibilityOff />
-                                ) : (
-                                  <Visibility />
-                                )}
-                              </IconButton>
-                            </InputAdornment>
-                          }
-                          label="Password"
-                        />
-                      )}
-                    />
-                  </FormControl>
+                  <InputComponent
+                    name="password"
+                    type="password"
+                    placeholder="Password"
+                    register={register("password", {
+                      required: true,
+                    })}
+                  />
+                  {errors?.password?.type === "required" && (
+                    <div className="!mt-0 ml-[5px] text-left">
+                      <p className="text-slate-400">Password is required.</p>
+                    </div>
+                  )}
                 </div>
-                {errors?.password?.type === "required" && (
-                  <div className="!mt-0 ml-[16px] text-left">
-                    <p className="text-slate-400">Password is required.</p>
-                  </div>
-                )}
 
                 <div className="flex flex-row justify-start space-x-3 mt-8 ml-5">
                   <button

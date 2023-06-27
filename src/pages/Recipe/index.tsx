@@ -59,7 +59,7 @@ const RecipesList: FC = () => {
           )}
         </div>
       </section>
-      <div>
+      <div className="mb-10">
         <InputComponent
           type="search"
           name="searchRecipe"
