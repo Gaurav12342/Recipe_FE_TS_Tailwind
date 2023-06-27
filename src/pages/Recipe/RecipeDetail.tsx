@@ -1,23 +1,51 @@
 import { FC, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "../../utils/axios";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import Dialog from "../../component/Dialog";
 import Button from "../../component/Button";
+import { routesConstant } from "../../router/constant";
 
 const RecipeDetail: FC = () => {
   const params = useParams();
+  const navigate = useNavigate();
+  const isToken = localStorage.getItem("user-data");
+
   const [isDeleteDialog, setIsDeleteDialog] = useState(false);
 
   const fetchRecipesById = () => {
     return axios.get(`/recipe/list/${params?.id}`).then((res) => res?.data);
   };
 
+  const deleteRecipeById = (id: any) => {
+    return axios
+      .delete(`/recipe/list/${id}`)
+      .then((res) => {
+        return res;
+      })
+      .catch();
+  };
+
   const { data } = useQuery({
-    queryKey: ["fetch guery by id"],
+    queryKey: ["fetch-guery-by-id"],
     queryFn: fetchRecipesById,
   });
-  console.log("🚀 ~ file: RecipeById.tsx:16 ~ data:", data);
+
+  const mutations = useMutation({
+    mutationKey: ["delete-recipe"],
+    mutationFn: (recipeId) => deleteRecipeById(recipeId),
+    onSuccess(data, variables, context) {
+      if (data?.data?.status === 200) {
+        setIsDeleteDialog(false);
+        navigate(routesConstant?.recipe?.path);
+      }
+    },
+  });
+  const handleConfirm = () => {
+    if (data?.status === 200) {
+      mutations.mutate(data?.data?._id);
+    }
+  };
 
   return (
     <div>
@@ -32,10 +60,12 @@ const RecipeDetail: FC = () => {
 
       {/* Action Section  */}
 
-      <div className="space-x-4 flex flex-row justify-end">
-        <Button onClick={() => {}}>Edit</Button>
-        <Button onClick={() => setIsDeleteDialog(true)}>Delete</Button>
-      </div>
+      {isToken && (
+        <div className="space-x-4 flex flex-row justify-end">
+          <Button onClick={() => {}}>Edit</Button>
+          <Button onClick={() => setIsDeleteDialog(true)}>Delete</Button>
+        </div>
+      )}
 
       {/* Card section */}
       <div>
@@ -106,10 +136,10 @@ const RecipeDetail: FC = () => {
         {isDeleteDialog && (
           <Dialog
             isOpen={isDeleteDialog}
-            onConfirm={() => setIsDeleteDialog(false)}
+            onConfirm={handleConfirm}
             onCancel={() => setIsDeleteDialog(false)}
             title={"Are you sure you want to delete record ?"}
-            confirmText={"Confirm"}
+            confirmText={mutations?.isLoading ? "Confirm..." : "Confirm"}
             cancelText={"Cancel"}
           />
         )}

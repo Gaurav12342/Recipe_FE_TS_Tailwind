@@ -4,8 +4,7 @@ const Home: FC = () => {
   const socket = connect("http://localhost:4000");
   const [userMessage, setUserMessage] = useState("");
   const [getResponse, setResponse] = useState<any>("");
-  console.log("🚀 ~ file: Home.tsx:7 ~ getResponse:", getResponse);
-
+  
   useEffect(() => {
     socket.on("receive_message", (args) => {
       setResponse(args);

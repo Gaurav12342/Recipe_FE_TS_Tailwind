@@ -12,6 +12,7 @@ import { useForm } from "react-hook-form";
 
 const RecipesList: FC = () => {
   const navigate = useNavigate();
+  const isToken = localStorage.getItem("user-data");
   const { register } = useForm({});
 
   const [search, setSearch] = useState("");
@@ -53,7 +54,9 @@ const RecipesList: FC = () => {
         </div>
         <div className="flex flex-row justify-between items-center">
           <p className="text-xl text-gray-500">Easy recipes to cook at home</p>
-          <Button onClick={navigateCreateRecipe}>Create Recipe</Button>
+          {isToken && (
+            <Button onClick={navigateCreateRecipe}>Create Recipe</Button>
+          )}
         </div>
       </section>
       <div>
