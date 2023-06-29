@@ -7,7 +7,7 @@ import RecipeHome from "../pages/index";
 import ManageRecipe from "../pages/Recipe/ManageRecipe";
 import SignIn from "../pages/Auth/Sign-In/index";
 import SignUp from "../pages/Auth/Sign-up";
-import Header from "../component/Header";
+import Header from "../Layout/Header";
 import Profile from "../pages/Auth/Profile";
 
 const Layout = ({ children }: any) => (
