@@ -21,9 +21,12 @@ const SignIn: FC = () => {
 
   const { mutate, isLoading } = useMutation({
     mutationFn: (newTodo) => {
-      return axios.post("/auth/sign-in", newTodo);
+      return axios.post(
+        "https://recipes-be-ts-23fx-l5surhiys-gaurav12342.vercel.app/auth/sign-in",
+        newTodo
+      );
     },
-    onSuccess(data, variables, context) {
+    onSuccess(data: any, variables: any, context: any) {
       if (data?.data?.status === 200) {
         localStorage.setItem("user-data", data?.data?.accessToken);
         navigate(routesConstant?.recipe?.path);
@@ -61,7 +64,11 @@ const SignIn: FC = () => {
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="flex flex-col max-w-3xl ml-48 -mr-32 md:mx-auto mt-1 md:mt-32 rounded-xl overflow-hidden bg-red-100 md:flex md:flex-row">
               <div className="w-full md:w-1/2">
-                <img src={deskImage} alt="desk" className="w-full h-52 md:h-96" />
+                <img
+                  src={deskImage}
+                  alt="desk"
+                  className="w-full h-52 md:h-96"
+                />
               </div>
               <div className="w-full md:mt-10 md:w-1/2">
                 <div className="px-8 py-3">

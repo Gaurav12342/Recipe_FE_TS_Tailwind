@@ -13,13 +13,25 @@ import { useForm, Controller } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { routesConstant } from "../../../router/constant";
 import InputComponent from "../../../component/InputComponent";
+import { useMutation } from "@tanstack/react-query";
+import axios from "axios";
 
 const SignUp: FC = () => {
   const navigate = useNavigate();
-  const [showPassword, setShowPassword] = useState(false);
+  // const [showPassword, setShowPassword] = useState(false);
+
+  const { mutate, isLoading } = useMutation({
+    mutationFn: (newTodo) => {
+      return axios.post("https://recipes-be-ts-23fx-l5surhiys-gaurav12342.vercel.app/auth/sign-up", newTodo);
+    },
+    onSuccess(data, variables, context) {
+      if (data?.status == 201) {
+        navigate(routesConstant?.signIn?.path);
+      }
+    },
+  });
 
   const {
-    control,
     handleSubmit,
     formState: { errors },
     reset,
@@ -34,12 +46,12 @@ const SignUp: FC = () => {
     },
   });
 
-  const handleClickShowPassword = () => {
-    setShowPassword(!showPassword);
-  };
+  // const handleClickShowPassword = () => {
+  //   setShowPassword(!showPassword);
+  // };
 
   const onSubmit = (data: any) => {
-    console.log(data);
+    mutate(data);
   };
 
   return (
@@ -132,7 +144,10 @@ const SignUp: FC = () => {
                     {
                       <div
                         className={`${
-                          errors?.email?.type !== "required" && errors?.email?.type !== "pattern" ? "py-4" : "py-1"
+                          errors?.email?.type !== "required" &&
+                          errors?.email?.type !== "pattern"
+                            ? "py-4"
+                            : "py-1"
                         } text-left`}
                       >
                         <p className="ml-[5px] text-slate-400">
@@ -187,7 +202,7 @@ const SignUp: FC = () => {
                     className="py-1 px-5 bg-[#acb9a2] hover:bg-[#fb693c] rounded-lg text-white font-bold"
                     type="submit"
                   >
-                    Sign Up
+                    {isLoading ? "Loading..." : "Sign Up"}
                   </button>
 
                   <button
