@@ -55,85 +55,134 @@ const SignUp: FC = () => {
                 <img
                   src={deskImage}
                   alt="desk"
-                  className="w-full h-52 md:h-96"
+                  className="w-full !h-[35rem] md:h-96"
                 />
               </div>
-              <div className="w-full md:mt-10 md:w-1/2">
-                <div className="px-8 py-3">
+              <div className="w-full md:mt-2 md:w-1/2">
+                <div className="px-8 py-4">
                   <h1 className="text-red-400 text-4xl font-bold">Sign Up</h1>
                 </div>
 
-                <div className="space-y-6 flex-col ml-5 mr-16 md:mx-8 md:ml-3">
-                  <InputComponent
-                    name="fname"
-                    placeholder="First Name"
-                    register={register("fname", {
-                      required: true,
-                    })}
-                  />
-                  {errors?.fname?.type === "required" && (
-                    <div className="!mt-0 ml-[5px] text-left">
-                      <p className="text-slate-400">Password is required.</p>
-                    </div>
-                  )}
-
-                  <InputComponent
-                    name="lname"
-                    placeholder="Last Name"
-                    register={register("lname", {
-                      required: true,
-                    })}
-                  />
-                  {errors?.lname?.type === "required" && (
-                    <div className="!mt-0 ml-[5px] text-left">
-                      <p className="text-slate-400">Password is required.</p>
-                    </div>
-                  )}
-
-                  <InputComponent
-                    name="city"
-                    placeholder="City"
-                    register={register("city")}
-                  />
-
-                  <InputComponent
-                    name="email"
-                    placeholder="Email"
-                    register={register("email", {
-                      required: true,
-                      pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/,
-                    })}
-                  />
-                  {errors?.email?.type === "required" && (
-                    <div className="!mt-0 ml-[5px] text-left">
-                      <p className="text-slate-400">Email is required.</p>
-                    </div>
-                  )}
-
-                  {errors?.email?.type === "pattern" && (
-                    <div className="!mt-0 ml-[5px] text-left">
-                      <p className="text-slate-400">
-                        Please enter the valid email adddress.
+                <div className="flex-col ml-5 mr-16 md:mx-8 md:ml-3">
+                  <div>
+                    <InputComponent
+                      name="fname"
+                      placeholder="First Name"
+                      register={register("fname", {
+                        required: true,
+                      })}
+                    />
+                    <div
+                      className={`${
+                        errors?.fname?.type !== "required" ? "py-4" : "py-1"
+                      } text-left`}
+                    >
+                      <p className="ml-[5px] text-slate-400">
+                        {errors?.fname?.type === "required"
+                          ? "Password is required."
+                          : ""}
                       </p>
                     </div>
-                  )}
+                  </div>
 
-                  <InputComponent
-                    name="password"
-                    type="password"
-                    placeholder="Password"
-                    register={register("password", {
-                      required: true,
-                    })}
-                  />
-                  {errors?.password?.type === "required" && (
-                    <div className="!mt-0 ml-[5px] text-left">
-                      <p className="text-slate-400">Password is required.</p>
+                  <div>
+                    <InputComponent
+                      name="lname"
+                      placeholder="Last Name"
+                      register={register("lname", {
+                        required: true,
+                      })}
+                    />
+                    <div
+                      className={`${
+                        errors?.lname?.type !== "required" ? "py-4" : "py-1"
+                      } text-left`}
+                    >
+                      {
+                        <p className="ml-[5px] text-slate-400">
+                          {errors?.lname?.type === "required"
+                            ? "Password is required."
+                            : ""}
+                        </p>
+                      }
                     </div>
-                  )}
+                  </div>
+
+                  <div>
+                    <InputComponent
+                      name="city"
+                      placeholder="City"
+                      register={register("city")}
+                    />
+
+                    <div className={`py-4 text-left`}>
+                      <p className="text-slate-400">{""}</p>
+                    </div>
+                  </div>
+
+                  <div>
+                    <InputComponent
+                      name="email"
+                      placeholder="Email"
+                      register={register("email", {
+                        required: true,
+                        pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/,
+                      })}
+                    />
+                    {
+                      <div
+                        className={`${
+                          errors?.email?.type !== "required" && errors?.email?.type !== "pattern" ? "py-4" : "py-1"
+                        } text-left`}
+                      >
+                        <p className="ml-[5px] text-slate-400">
+                          {" "}
+                          {errors?.email?.type === "required"
+                            ? "Email is required."
+                            : ""}
+                        </p>
+                      </div>
+                    }
+
+                    {
+                      <div
+                        className={`${
+                          errors?.email?.type !== "pattern" ? "py-0" : "py-1"
+                        } text-left`}
+                      >
+                        <p className="ml-[5px] text-slate-400">
+                          {errors?.email?.type === "pattern"
+                            ? "Please enter the valid email adddress."
+                            : ""}
+                        </p>
+                      </div>
+                    }
+                  </div>
+
+                  <div>
+                    <InputComponent
+                      name="password"
+                      type="password"
+                      placeholder="Password"
+                      register={register("password", {
+                        required: true,
+                      })}
+                    />
+                    <div
+                      className={`${
+                        errors?.password?.type !== "required" ? "py-3" : "py-1"
+                      } text-left`}
+                    >
+                      <p className="ml-[5px] text-slate-400">
+                        {errors?.password?.type === "required"
+                          ? "Password is required."
+                          : ""}
+                      </p>
+                    </div>
+                  </div>
                 </div>
 
-                <div className="flex flex-row justify-start space-x-3 mt-8 ml-5">
+                <div className="flex flex-row justify-start space-x-3 mt-2 ml-5">
                   <button
                     className="py-1 px-5 bg-[#acb9a2] hover:bg-[#fb693c] rounded-lg text-white font-bold"
                     type="submit"
