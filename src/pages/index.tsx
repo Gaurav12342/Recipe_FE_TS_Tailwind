@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { useNavigate } from "react-router-dom";
-import { routesConstant } from "../router/constant";
+import { routesConstant } from "router/constant";
 
 const Recipe: FC = () => {
   const navigate = useNavigate();

@@ -8,10 +8,10 @@ import {
   InputLabel,
 } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import deskImage from "../../../assets/images/image-desktop.jpg";
+import deskImage from "assets/images/image-desktop.jpg";
 import { useForm, Controller } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { routesConstant } from "../../../router/constant";
+import { routesConstant } from "router/constant";
 import axios from "axios";
 import { useMutation } from "@tanstack/react-query";
 

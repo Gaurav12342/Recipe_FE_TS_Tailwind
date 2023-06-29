@@ -1,5 +1,5 @@
 import { FC, useState } from "react";
-import InputComponent from "../../component/InputComponent";
+import InputComponent from "component/InputComponent";
 import {
   Typography,
   Accordion,
@@ -7,12 +7,12 @@ import {
   AccordionDetails,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import Button from "../../component/Button";
+import Button from "component/Button";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { routesConstant } from "../../router/constant";
+import { routesConstant } from "router/constant";
 import { useMutation } from "@tanstack/react-query";
-import axios from "../../utils/axios";
+import axios from "utils/axios";
 
 const ManageRecipe: FC = () => {
   const navigate = useNavigate();
@@ -32,11 +32,7 @@ const ManageRecipe: FC = () => {
     },
   ]);
 
-  const {
-    register,
-    handleSubmit,
-    reset,
-  } = useForm<any>();
+  const { register, handleSubmit, reset } = useForm<any>();
 
   const { mutate } = useMutation({
     mutationFn: (newTodo) => {

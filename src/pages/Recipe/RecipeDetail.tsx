@@ -1,10 +1,10 @@
 import { FC, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import axios from "../../utils/axios";
+import axios from "utils/axios";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import Dialog from "../../component/Dialog";
-import Button from "../../component/Button";
-import { routesConstant } from "../../router/constant";
+import Dialog from "component/Dialog";
+import Button from "component/Button";
+import { routesConstant } from "router/constant";
 
 const RecipeDetail: FC = () => {
   const params = useParams();

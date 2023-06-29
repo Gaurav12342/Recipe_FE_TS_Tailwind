@@ -3,19 +3,14 @@ import {
   AppBar,
   Box,
   Toolbar,
-  Typography,
   IconButton,
-  Switch,
-  FormControlLabel,
-  FormGroup,
   MenuItem,
   Menu,
   Button,
 } from "@mui/material";
-import MenuIcon from "@mui/icons-material/Menu";
 import { AccountCircle } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
-import { routesConstant } from "../router/constant";
+import { routesConstant } from "router/constant";
 
 const Header: FC = () => {
   const navigate = useNavigate();

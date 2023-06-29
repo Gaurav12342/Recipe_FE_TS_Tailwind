@@ -1,13 +1,12 @@
 import { FC, useState } from "react";
-import SearchInput from "../../component/InputComponent";
-import RecipeCard from "../../component/Card";
-import axios from "../../utils/axios";
+import RecipeCard from "component/Card";
+import axios from "utils/axios";
 import { useQuery } from "@tanstack/react-query";
-import useDebounce from "../../hooks/useDebounce";
-import Button from "../../component/Button";
+import useDebounce from "hooks/useDebounce";
+import Button from "component/Button";
 import { useNavigate } from "react-router-dom";
-import { routesConstant } from "../../router/constant";
-import InputComponent from "../../component/InputComponent";
+import { routesConstant } from "router/constant";
+import InputComponent from "component/InputComponent";
 import { useForm } from "react-hook-form";
 
 const RecipesList: FC = () => {

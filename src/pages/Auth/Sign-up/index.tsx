@@ -1,9 +1,9 @@
 import { FC } from "react";
-import deskImage from "../../../assets/images/image-desktop.jpg";
+import deskImage from "assets/images/image-desktop.jpg";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { routesConstant } from "../../../router/constant";
-import InputComponent from "../../../component/InputComponent";
+import { routesConstant } from "router/constant";
+import InputComponent from "component/InputComponent";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 
