@@ -6,4 +6,5 @@ export const routesConstant = {
 
   signIn: { path: "/sign-in" },
   signUp: { path: "/sign-up" },
+  profile: { path: "/user-profile" },
 };

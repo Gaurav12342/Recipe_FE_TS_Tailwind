@@ -1,15 +1,6 @@
-import { FC, useState } from "react";
-import {
-  OutlinedInput,
-  IconButton,
-  InputAdornment,
-  TextField,
-  FormControl,
-  InputLabel,
-} from "@mui/material";
-import { Visibility, VisibilityOff } from "@mui/icons-material";
+import { FC } from "react";
 import deskImage from "../../../assets/images/image-desktop.jpg";
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { routesConstant } from "../../../router/constant";
 import InputComponent from "../../../component/InputComponent";
@@ -22,7 +13,10 @@ const SignUp: FC = () => {
 
   const { mutate, isLoading } = useMutation({
     mutationFn: (newTodo) => {
-      return axios.post("https://recipes-be-ts-23fx-l5surhiys-gaurav12342.vercel.app/auth/sign-up", newTodo);
+      return axios.post(
+        "https://recipes-be-ts-23fx-l5surhiys-gaurav12342.vercel.app/auth/sign-up",
+        newTodo
+      );
     },
     onSuccess(data, variables, context) {
       if (data?.status == 201) {

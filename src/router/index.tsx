@@ -7,6 +7,17 @@ import RecipeHome from "../pages/index";
 import ManageRecipe from "../pages/Recipe/ManageRecipe";
 import SignIn from "../pages/Auth/Sign-In/index";
 import SignUp from "../pages/Auth/Sign-up";
+import Header from "../component/Header";
+import Profile from "../pages/Auth/Profile";
+
+const Layout = ({ children }: any) => (
+  <div>
+    <div className="my-16">
+      <Header />
+    </div>
+    {children}
+  </div>
+);
 
 const index: any = createBrowserRouter([
   {
@@ -15,15 +26,35 @@ const index: any = createBrowserRouter([
   },
   {
     path: routesConstant.recipe.path,
-    element: <RecipesList />,
+    element: (
+      <Layout>
+        <RecipesList />
+      </Layout>
+    ),
   },
   {
     path: routesConstant.recipeById.path,
-    element: <RecipeDetail />,
+    element: (
+      <Layout>
+        <RecipeDetail />
+      </Layout>
+    ),
   },
   {
     path: routesConstant.recipeCreate.path,
-    element: <ManageRecipe />,
+    element: (
+      <Layout>
+        <ManageRecipe />
+      </Layout>
+    ),
+  },
+  {
+    path: routesConstant.profile.path,
+    element: (
+      <Layout>
+        <Profile />
+      </Layout>
+    ),
   },
   {
     path: routesConstant.signIn.path,
