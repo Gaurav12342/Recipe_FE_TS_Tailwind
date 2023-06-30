@@ -1,46 +1,59 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { routesConstant } from "router/constant";
 import InputComponent from "component/InputComponent";
-import { useMutation } from "@tanstack/react-query";
-import axios from "axios";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import axios from "utils/axios";
 
 const Profile: FC = () => {
   const navigate = useNavigate();
   // const [showPassword, setShowPassword] = useState(false);
 
-  const { mutate, isLoading } = useMutation({
-    mutationFn: (newTodo) => {
-      return axios.post(
-        "https://recipes-be-ts-23fx-l5surhiys-gaurav12342.vercel.app/auth/sign-up",
-        newTodo
-      );
-    },
-    onSuccess(data, variables, context) {
-      if (data?.status == 201) {
-        navigate(routesConstant?.signIn?.path);
-      }
+  const { data: userProfile } = useQuery({
+    queryKey: ["user-profile"],
+    queryFn: () => {
+      return axios.get("/auth/profile");
     },
   });
+
+  const { mutate, isLoading, data } = useMutation({
+    mutationKey: ["update-user-profile"],
+    mutationFn: (newObj) => {
+      return axios.put("auth/update-profile", newObj);
+    },
+  });
+  console.log("🚀 ~ file: index.tsx:26 ~ data:", data)
+
+  useEffect(() => {
+    if (userProfile?.data?.status == 200) {
+      if (Object.keys(userProfile?.data?.data)?.length > 0) {
+        const { fname, lname, city, email } = userProfile?.data?.data;
+        setValue("fname", fname);
+        setValue("lname", lname);
+        setValue("city", city);
+        setValue("email", email);
+      }
+    }
+  }, [userProfile]);
 
   const {
     handleSubmit,
     formState: { errors },
     reset,
     register,
+    setValue,
   } = useForm({
     defaultValues: {
       fname: "",
       lname: "",
       city: "",
       email: "",
-      password: "",
     },
   });
 
   const onSubmit = (data: any) => {
-    console.log("🚀 ~ file: index.tsx:44 ~ onSubmit ~ data:", data);
+    mutate(data);
   };
 
   return (
@@ -153,28 +166,6 @@ const Profile: FC = () => {
                       </p>
                     </div>
                   }
-                </div>
-
-                <div>
-                  <InputComponent
-                    name="password"
-                    type="password"
-                    placeholder="Password"
-                    register={register("password", {
-                      required: true,
-                    })}
-                  />
-                  <div
-                    className={`${
-                      errors?.password?.type !== "required" ? "py-3" : "py-1"
-                    } text-left`}
-                  >
-                    <p className="ml-[5px] text-slate-400">
-                      {errors?.password?.type === "required"
-                        ? "Password is required."
-                        : ""}
-                    </p>
-                  </div>
                 </div>
               </div>
 
