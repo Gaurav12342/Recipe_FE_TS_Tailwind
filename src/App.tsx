@@ -11,7 +11,7 @@ const App: FC = () => {
     <div className="App">
       <QueryClientProvider client={queryClient}>
         <div className="App-header">
-          <div className="w-2/4">
+          <div className="w-3/4">
             <RouterProvider router={Routers} />
           </div>
         </div>
